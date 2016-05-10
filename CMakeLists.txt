@@ -3,3 +3,9 @@ project(tetgen)
 
 add_library(tetgen STATIC tetgen.cxx predicates.cxx)
 target_compile_definitions(tetgen PRIVATE -DTETLIBRARY)
+
+INSTALL(TARGETS tetgen
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    )
+INSTALL(FILES tetgen.h DESTINATION include)
