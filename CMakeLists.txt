@@ -7,6 +7,11 @@ if(UNIX)
     target_compile_options(tetgen PRIVATE -fPIC)
 endif(UNIX)
 
+ADD_EXECUTABLE(tetgen_bin tetgen.cxx predicates.cxx)
+if(UNIX)
+    target_compile_options(tetgen PRIVATE -fPIC)
+endif(UNIX)
+
 INSTALL(TARGETS tetgen
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
