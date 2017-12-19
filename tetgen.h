@@ -551,6 +551,9 @@ public:
       }
       delete [] vcelllist;
     }
+    // Set everything back to NULL so repeated deinitialize() calls won't seg
+    // fault (e.g. stack unwinding during exception handling).
+    initialize();
   }
 
   // Constructor & destructor.
@@ -2145,30 +2148,40 @@ public:
   {
     if (bgm != NULL) {
       delete bgm;
+      bgm = NULL;
     }
 
     if (points != (memorypool *) NULL) {
       delete points;
       delete [] dummypoint;
+      points = NULL;
+      dummypoint = NULL;
     }
 
     if (tetrahedrons != (memorypool *) NULL) {
       delete tetrahedrons;
+      tetrahedrons = NULL;
     }
 
     if (subfaces != (memorypool *) NULL) {
       delete subfaces;
       delete subsegs;
+      subfaces = NULL;
+      subsegs = NULL;
     }
 
     if (tet2segpool != NULL) {
       delete tet2segpool;
       delete tet2subpool;
+      tet2segpool = NULL;
+      tet2subpool = NULL;
     }
 
     if (flippool != NULL) {
       delete flippool;
       delete unflipqueue;
+      flippool = NULL;
+      unflipqueue = NULL;
     }
 
     if (cavetetlist != NULL) {
@@ -2176,6 +2189,10 @@ public:
       delete cavebdrylist;
       delete caveoldtetlist;
       delete cavetetvertlist;
+      cavetetlist = NULL;
+      cavebdrylist = NULL;
+      caveoldtetlist = NULL;
+      cavetetvertlist = NULL;
     }
 
     if (caveshlist != NULL) {
@@ -2186,25 +2203,39 @@ public:
       delete cavetetseglist;
       delete caveencshlist;
       delete caveencseglist;
+      caveshlist = NULL;
+      caveshbdlist = NULL;
+      cavesegshlist = NULL;
+      cavetetshlist = NULL;
+      cavetetseglist = NULL;
+      caveencshlist = NULL;
+      caveencseglist = NULL;
     }
 
     if (subsegstack != NULL) {
       delete subsegstack;
       delete subfacstack;
       delete subvertstack;
+      subsegstack = NULL;
+      subfacstack = NULL;
+      subvertstack = NULL;
     }
 
     if (idx2facetlist != NULL) {
       delete [] idx2facetlist;
       delete [] facetverticeslist;
+      idx2facetlist = NULL;
+      facetverticeslist = NULL;
     }
 
     if (segmentendpointslist != NULL) {
       delete [] segmentendpointslist;
+      segmentendpointslist = NULL;
     }
 
     if (highordertable != NULL) {
       delete [] highordertable;
+      highordertable = NULL;
     }
   }
 
